@@ -20,6 +20,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "prop-types": "^15.8.1"
+        "prop-types": "^15.8.1",
+        "react-flickity-component": "^4.0.5"
     }
 }
