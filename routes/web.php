@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\User\DashboardController;
+use App\Http\Controllers\User\MoviesController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -22,6 +23,9 @@ Route::middleware(['auth', 'role:user'])->prefix('dashboard')->name('user.dashbo
 
     Route::get('/', [DashboardController::class, 'index'])
         ->name('index');
+
+    Route::get('movie/{movie:slug}', [MoviesController::class, 'show'])
+        ->name('movie.show');
 });
 
 Route::prefix('prototype')->name('prototype.')->group(function () {
