@@ -26,12 +26,15 @@ Route::middleware(['auth', 'role:user'])->prefix('dashboard')->name('user.dashbo
         ->name('index');
 
     Route::get('movie/{movie:slug}', [MoviesController::class, 'show'])
+        ->middleware('checkUserSubscription:true')
         ->name('movie.show');
 
     Route::get('subscription-plan', [SubscriptionPlanController::class, 'index'])
+        ->middleware('checkUserSubscription:false')
         ->name('subscriptionPlan.index');
 
     Route::post('subscription-plan/{subscriptionPlan}/user-subscribe', [SubscriptionPlanController::class, 'userSubscribe'])
+        ->middleware('checkUserSubscription:false')
         ->name('subscriptionPlan.userSubscribe');
 });
 
