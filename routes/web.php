@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\MovieController;
 use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\MoviesController;
 use App\Http\Controllers\User\SubscriptionPlanController;
@@ -38,26 +39,12 @@ Route::middleware(['auth', 'role:user'])->prefix('dashboard')->name('user.dashbo
         ->name('subscriptionPlan.userSubscribe');
 });
 
-Route::prefix('prototype')->name('prototype.')->group(function () {
-    Route::get('/login', function () {
-        return Inertia::render('Prototype/Login');
-    })->name('login');
-
-    Route::get('/register', function () {
-        return Inertia::render('Prototype/Register');
-    })->name('register');
-
-    Route::get('/dashboard', function () {
-        return Inertia::render('Prototype/Dashboard');
-    })->name('dashboard');
-
-    Route::get('/subscriptionPlan', function () {
-        return Inertia::render('Prototype/SubscriptionPlan');
-    })->name('subscriptionPlan');
-
-    Route::get('/movies/{slug}', function () {
-        return Inertia::render('Prototype/Movie/Show');
-    })->name('movie.show');
-});
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.dashboard.')->group(
+    function () {
+        Route::put('movie/{movie}/restore', [MovieController::class, 'restore'])
+            ->name('movie.restore');
+        Route::resource('movie', MovieController::class);
+    }
+);
 
 require __DIR__ . '/auth.php';

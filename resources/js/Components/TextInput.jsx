@@ -48,7 +48,7 @@ export default function TextInput({
         value={value}
         defaultValue={defaultValue}
         ref={inputRef}
-        className={`rounded-2xl bg-form-bg py-[13px] px-7 w-full ${
+        className={`rounded-2xl py-[13px] px-7 w-full ${
           isError && 'input-error'
         } input-${variant} ${className}`}
         autoComplete={autoComplete}
